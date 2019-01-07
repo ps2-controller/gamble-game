@@ -1,2 +1,2 @@
 # gamble-game
-Simple solidity randomness game
+Simple solidity gambling game

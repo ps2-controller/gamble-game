@@ -1,5 +1,5 @@
 pragma solidity ^0.5.0;
-import "./ gamble-game.sol"
+import "./gamble-game.sol";
 
 contract GambleFactory{
 
@@ -13,7 +13,8 @@ contract GambleFactory{
 
 	function createGambleContract (string memory _gambleName, uint _costToEnter) public payable{
 		require (msg.value == _costToEnter);
-		gambles[msg.sender] = (new Gamble).value(_costToEnter)(_costToEnter, msg.sender);
+		Gamble newGamble = (new Gamble).value(_costToEnter)(_costToEnter, msg.sender);
+		gambles[msg.sender] = address(newGamble);
 		gambleGames.push(newGamble);
 		emit newGambleContractCreated(msg.sender, _gambleName);
 	}

@@ -1,10 +1,12 @@
+pragma solidity ^0.5.0;
 contract Gamble {
-	constructor (uint _costToEnter, address _host) public payable {
+	constructor (uint _costToEnter, address payable _host) public payable {
         setGameAddresses(_host);
         setCostToEnter(_costToEnter);
     }
-	address host;
-	address player;
+	address payable host;
+	address payable player;
+	address factory;	
 	uint costToEnter;
 
 	modifier onlyHost {
@@ -12,9 +14,10 @@ contract Gamble {
 		_;
 	}
 
-	function setGameAddresses (address _host) private {
+	function setGameAddresses (address payable _host) private {
 		host = _host;
 		player = 0x0000000000000000000000000000000000000000;
+		factory = msg.sender;
 	}
 
 	function setCostToEnter(uint _costToEnter) private {
